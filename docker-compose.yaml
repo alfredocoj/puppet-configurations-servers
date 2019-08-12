@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  postgres:
+    #image: postgres:9.6
+    build:
+      context: .
+    environment:
+      POSTGRES_PASSWORD: 'ithappens'
+    ports:
+      - '15432:5432'
+    volumes:
+      - /home/alfredo/postgres/data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'admin@admin'
+      PGADMIN_DEFAULT_PASSWORD: 'ithappens'
+    ports:
+      - '16543:80'
+    depends_on:
+      - postgres
